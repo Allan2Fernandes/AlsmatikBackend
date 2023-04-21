@@ -9,10 +9,16 @@ namespace AlsmatikBackend
         private static DbHandler instance = new DbHandler();
         private DbHandler() // singleton constructor
         {
-            builder.DataSource = "DESKTOP-2B3AJNE";
-            builder.UserID = "sa";
-            builder.Password = "123456";
-            builder.InitialCatalog = "PDHS_Guide";
+            //Get the environment variable
+            string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
+            //The single variable holds all the information, so split it up
+            var variables = envVariable.Split(',');
+
+            //Use the list to get individual variables
+            builder.DataSource = variables[0].ToString();
+            builder.UserID = variables[1].ToString();
+            builder.Password = variables[2].ToString();
+            builder.InitialCatalog = variables[3].ToString();
             connectToDB();
         }
 

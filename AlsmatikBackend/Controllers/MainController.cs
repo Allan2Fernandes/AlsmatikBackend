@@ -18,5 +18,14 @@ namespace AlsmatikBackend.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet("EnvVariableTest")]
+        public async Task<ActionResult<string>> EnvVariableTest()
+        {
+            string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
+            var variables = envVariable.Split(',');
+            return Ok(variables[3].ToString());
+        }
     }
+
 }

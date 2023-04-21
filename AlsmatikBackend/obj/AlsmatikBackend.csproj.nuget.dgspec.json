@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj": {}
+    "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj": {
+    "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
+        "projectUniqueName": "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
         "projectName": "AlsmatikBackend",
-        "projectPath": "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
+        "projectPath": "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\obj\\",
+        "outputPath": "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

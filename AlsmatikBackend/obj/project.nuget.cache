@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nNXQyXdm/drZ5F/koEYm5E81YM5czg8qCD0U/UlvYkjHNX8MjAsyz+4/+sl4S5NqiLCJlipcs3Lij/xxrPycFg==",
+  "dgSpecHash": "vpxMX88EzfSq8hjnuCanYFkPeHdL/Yb1b0gHuct9ns4FoDjDiKAyHMtMU48X6xe2VHZYeSGFfCe1Pasq0eCizQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\allan\\source\\repos\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
+  "projectFilePath": "C:\\Users\\allan\\Documents\\GitHub\\AlsmatikBackend\\AlsmatikBackend\\AlsmatikBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
