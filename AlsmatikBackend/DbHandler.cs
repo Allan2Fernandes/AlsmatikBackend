@@ -1,4 +1,6 @@
 ﻿using System.Data.SqlClient;
+using System.Diagnostics;
+
 
 namespace AlsmatikBackend
 {
@@ -6,6 +8,7 @@ namespace AlsmatikBackend
     {
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         SqlConnection connection;
+        //Use the private constructor because singleton
         private static DbHandler Instance = new DbHandler();
         private DbHandler() // singleton constructor
         {
@@ -33,25 +36,25 @@ namespace AlsmatikBackend
             connection.Open();
         }
 
-        public List<object> GetChosenParams(int UserID, int ArtGrp, int ActualSetID) //2050, 3, 0
+        public List<object> ExecuteRawQuery(string query) //2050, 3, 0
         {
-            string sql = $"[dbo].[sp_GetFormParamUser] @UserID = {UserID},@ArtGrp = {ArtGrp}, @ActualSetID = {ActualSetID}";
-            SqlCommand command = new SqlCommand(sql, connection);
+            SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader reader = command.ExecuteReader();
             var allData = new List<object>();
+       
+
             while (reader.Read())
             {
-                var RowData = new
+                var allFieldNames = new List<string>();
+                var RowElement = new Dictionary<string, object>();
+                for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    ParamGroup = reader["ParamGroup"],
-                    ParamID = reader["ParamID"],
-                    ParText = reader["ParText"],
-                    ParUnit = reader["ParUnit"],
-                    ParComment = reader["ParComment"],
-                    ParValue = reader["ParValue"],
-                    Permission = reader["Permission"]
-                };
-                allData.Add(RowData);
+                    var fieldName = reader.GetName(i);
+                    allFieldNames.Add(fieldName);
+                    RowElement[fieldName] = (reader[fieldName].ToString().Length == 0 ? "" : reader[fieldName]);
+                }
+                
+                allData.Add(RowElement);
             }
             reader.Close();
             return allData;

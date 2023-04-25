@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AlsmatikBackend.DataTransferObjects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,24 +9,29 @@ namespace AlsmatikBackend.Controllers
     [ApiController]
     public class MainController : ControllerBase
     {
-        [HttpGet("DBData/{UserID}")]
-        public async Task<ActionResult<List<object>>> DBConnectionTest(int UserID)
+        [HttpGet(nameof(ExecuteRawQuery) + "/{RawQuery}")]
+        public async Task<ActionResult<List<object>>> ExecuteRawQuery(string RawQuery)
         {
             var handler = DbHandler.GetDbHandlerInstance();
-            Debug.WriteLine(UserID);
 
-            var data = handler.GetChosenParams(UserID, 3, 0); //2050 us
+            var data = handler.ExecuteRawQuery(RawQuery);
 
             return Ok(data);
         }
 
-        [HttpGet("EnvVariableTest")]
-        public async Task<ActionResult<string>> EnvVariableTest()
+        [HttpPost(nameof(ExecuteRawQueryFromBody))]
+        public async Task<ActionResult<List<object>>> ExecuteRawQueryFromBody(BodyQuery BodyQuery)
         {
-            string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
-            var variables = envVariable.Split(',');
-            return Ok(variables[3].ToString());
+            //Get an instance of the Db Handler
+            var handler = DbHandler.GetDbHandlerInstance();
+
+            //Execute the raw query
+            var data = handler.ExecuteRawQuery(BodyQuery.Query);
+
+            //Return the data
+            return Ok(data);
         }
+
     }
 
 }
