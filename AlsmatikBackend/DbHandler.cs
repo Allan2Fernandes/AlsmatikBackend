@@ -41,21 +41,28 @@ namespace AlsmatikBackend
             SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader reader = command.ExecuteReader();
             var allData = new List<object>();
-       
 
-            while (reader.Read())
+            do 
             {
-                var allFieldNames = new List<string>();
-                var RowElement = new Dictionary<string, object>();
-                for (int i = 0; i < reader.FieldCount; i++)
+                var DataFromSelectStatement = new List<object>();
+                while (reader.Read())
                 {
-                    var fieldName = reader.GetName(i);
-                    allFieldNames.Add(fieldName);
-                    RowElement[fieldName] = (reader[fieldName].ToString().Length == 0 ? "" : reader[fieldName]);
+                    var allFieldNames = new List<string>();
+                    var RowElement = new Dictionary<string, object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        var fieldName = reader.GetName(i);
+                        allFieldNames.Add(fieldName);
+                        RowElement[fieldName] = (reader[fieldName].ToString().Length == 0 ? "" : reader[fieldName]);
+                    }
+
+                    DataFromSelectStatement.Add(RowElement);
                 }
-                
-                allData.Add(RowElement);
-            }
+                allData.Add(DataFromSelectStatement);
+            }while (reader.NextResult());
+
+
+            
             reader.Close();
             return allData;
         }
