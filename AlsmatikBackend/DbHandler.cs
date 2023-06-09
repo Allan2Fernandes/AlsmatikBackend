@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 
 
@@ -22,7 +23,8 @@ namespace AlsmatikBackend
             builder.UserID = variables[1].ToString();
             builder.Password = variables[2].ToString();
             builder.InitialCatalog = variables[3].ToString();
-            connectToDB();
+            builder.MultipleActiveResultSets = true;
+            //connectToDB();
         }
 
         public static DbHandler GetDbHandlerInstance() //Singleton getter
@@ -38,33 +40,47 @@ namespace AlsmatikBackend
 
         public List<object> ExecuteRawQuery(string query) //2050, 3, 0
         {
-            SqlCommand command = new SqlCommand(query, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            var allData = new List<object>();
-
-            do 
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
-                var DataFromSelectStatement = new List<object>();
-                while (reader.Read())
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    var allFieldNames = new List<string>();
-                    var RowElement = new Dictionary<string, object>();
-                    for (int i = 0; i < reader.FieldCount; i++)
+                    // Close any existing DataReader if it is open
+                    if (command.Connection.State == ConnectionState.Open)
                     {
-                        var fieldName = reader.GetName(i);
-                        allFieldNames.Add(fieldName);
-                        RowElement[fieldName] = (reader[fieldName].ToString().Length == 0 ? "" : reader[fieldName]);
+                        command.Connection.Close();
                     }
 
-                    DataFromSelectStatement.Add(RowElement);
+                    command.Connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        var allData = new List<object>();
+
+                        do
+                        {
+                            var DataFromSelectStatement = new List<object>();
+                            while (reader.Read())
+                            {
+                                var allFieldNames = new List<string>();
+                                var RowElement = new Dictionary<string, object>();
+                                for (int i = 0; i < reader.FieldCount; i++)
+                                {
+                                    var fieldName = reader.GetName(i);
+                                    allFieldNames.Add(fieldName);
+                                    RowElement[fieldName] = (reader[fieldName].ToString().Length == 0 ? "" : reader[fieldName]);
+                                }
+
+                                DataFromSelectStatement.Add(RowElement);
+                            }
+                            allData.Add(DataFromSelectStatement);
+                        } while (reader.NextResult());
+                        return allData.ToList();
+                    }
                 }
-                allData.Add(DataFromSelectStatement);
-            }while (reader.NextResult());
-
-
-            
-            reader.Close();
-            return allData;
+            }            
         }
+
+       
     }
 }

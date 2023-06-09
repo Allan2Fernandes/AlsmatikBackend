@@ -29,8 +29,8 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
-
+        //app.UseHttpsRedirection();
+        app.UseCors();
         app.UseAuthorization();
 
         app.MapControllers();

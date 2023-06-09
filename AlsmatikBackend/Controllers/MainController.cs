@@ -9,6 +9,7 @@ namespace AlsmatikBackend.Controllers
     [ApiController]
     public class MainController : ControllerBase
     {
+
         [HttpGet(nameof(ExecuteRawQuery) + "/{RawQuery}")]
         public async Task<ActionResult<List<object>>> ExecuteRawQuery(string RawQuery)
         {
@@ -18,6 +19,8 @@ namespace AlsmatikBackend.Controllers
 
             return Ok(data);
         }
+
+   
 
         [HttpPost(nameof(ExecuteRawQueryFromBody))]
         public async Task<ActionResult<List<object>>> ExecuteRawQueryFromBody(BodyQuery BodyQuery)
