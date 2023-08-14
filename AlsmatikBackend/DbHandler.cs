@@ -14,7 +14,8 @@ namespace AlsmatikBackend
         private DbHandler() // singleton constructor
         {
             //Get the environment variable
-            string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
+            //string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
+            string envVariable = Environment.GetEnvironmentVariable("PLCSQLDetails", EnvironmentVariableTarget.Machine).ToString();
             //The single variable holds all the information, so split it up
             var variables = envVariable.Split(',');
 
@@ -38,7 +39,7 @@ namespace AlsmatikBackend
             connection.Open();
         }
 
-        public List<object> ExecuteRawQuery(string query) //2050, 3, 0
+        public List<List<Dictionary<string, object>>> ExecuteRawQuery(string query) //2050, 3, 0
         {
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
@@ -55,11 +56,11 @@ namespace AlsmatikBackend
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        var allData = new List<object>();
+                        var allData = new List<List<Dictionary<string, object>>>();
 
                         do
                         {
-                            var DataFromSelectStatement = new List<object>();
+                            var DataFromSelectStatement = new List<Dictionary<string, object>>();
                             while (reader.Read())
                             {
                                 var allFieldNames = new List<string>();
