@@ -10,7 +10,7 @@ namespace AlsmatikBackend.Controllers
     public class ImageController : ControllerBase
     {
         [HttpGet(nameof(getImageOnID) + "/{ID}")]
-        [ResponseCache(Duration = 2592000, Location = ResponseCacheLocation.Any, NoStore = false)]
+        //[ResponseCache(Duration = 2592000, Location = ResponseCacheLocation.Any, NoStore = false)]
 
         public async Task<IActionResult> getImageOnID(int ID)
         {
