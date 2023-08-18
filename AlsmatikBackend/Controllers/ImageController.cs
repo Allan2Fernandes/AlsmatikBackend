@@ -32,5 +32,27 @@ namespace AlsmatikBackend.Controllers
             return File(imageBytes, contentType);
         }
 
+
+        [HttpGet(nameof(getImageOnFileName) + "/{FileName}")]
+        //[ResponseCache(Duration = 2592000, Location = ResponseCacheLocation.Any, NoStore = false)]
+
+        public async Task<IActionResult> getImageOnFileName(string FileName)
+        {
+            var handler = DbHandler.GetDbHandlerInstance();
+            string query = $"SELECT ParamValue FROM [PLCSQL].[dbo].[File_STRING] WHERE SetID = (SELECT MAX(SetID) FROM [PLCSQL].[dbo].[File_STRING] WHERE ParamValue = '{FileName}' GROUP BY ParamValue) AND ParamID = 35009";
+            var fileDataAsBase64String = handler.ExecuteRawQuery(query)[0][0]["ParamValue"].ToString().Trim();
+
+            // No need to remove the prefix this time
+
+            // Decode the base64-encoded image data
+            byte[] imageBytes = Convert.FromBase64String(fileDataAsBase64String);
+
+            // Determine the appropriate content type based on the image data (e.g., "image/jpeg")
+            string contentType = "image/jpeg"; // Change based on your image type
+
+            // Return the image as a file with the appropriate content type and headers
+            return File(imageBytes, contentType);
+        }
+
     }
 }
