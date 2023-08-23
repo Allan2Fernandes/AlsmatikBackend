@@ -10,6 +10,13 @@ namespace AlsmatikBackend.Controllers
     public class MainController : ControllerBase
     {
 
+
+        [HttpGet(nameof(ControllerIsOnline))]
+        public async Task<ActionResult<string>> ControllerIsOnline()
+        {
+            return Ok("Online");
+        }
+
         [HttpGet(nameof(ExecuteRawQuery) + "/{RawQuery}")]
         public async Task<ActionResult<List<object>>> ExecuteRawQuery(string RawQuery)
         {
