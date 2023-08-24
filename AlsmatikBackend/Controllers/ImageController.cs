@@ -48,10 +48,22 @@ namespace AlsmatikBackend.Controllers
             byte[] imageBytes = Convert.FromBase64String(fileDataAsBase64String);
 
             // Determine the appropriate content type based on the image data (e.g., "image/jpeg")
-            string contentType = "image/jpeg"; // Change based on your image type
+            string contentType = "";
+            if(fileDataAsBase64String[0] == '/')
+            {
+                contentType = "image/jpeg";
+            }else if (fileDataAsBase64String[0] == 'i')
+            {
+                contentType = "image/png";
+            }
+            else
+            {
+                return Ok("Not Okay");
+            }
+         
 
             // Return the image as a file with the appropriate content type and headers
-            return File(imageBytes, contentType);
+            return Ok(File(imageBytes, contentType));
         }
 
         [HttpGet(nameof(getReducedImageOnFileName) + "/{FileName}")]
