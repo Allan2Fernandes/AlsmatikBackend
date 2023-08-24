@@ -55,15 +55,10 @@ namespace AlsmatikBackend.Controllers
             }else if (fileDataAsBase64String[0] == 'i')
             {
                 contentType = "image/png";
-            }
-            else
-            {
-                return Ok("Not Okay");
-            }
-         
+            }         
 
             // Return the image as a file with the appropriate content type and headers
-            return Ok(File(imageBytes, contentType));
+            return File(imageBytes, contentType);
         }
 
         [HttpGet(nameof(getReducedImageOnFileName) + "/{FileName}")]
