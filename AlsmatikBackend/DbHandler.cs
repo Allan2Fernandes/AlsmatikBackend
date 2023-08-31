@@ -39,7 +39,7 @@ namespace AlsmatikBackend
             connection.Open();
         }
 
-        public List<List<Dictionary<string, object>>> ExecuteRawQuery(string query) //2050, 3, 0
+        public List<List<Dictionary<string, object>>> ExecuteRawQuery(string query)
         {
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
