@@ -21,10 +21,10 @@ namespace AlsmatikBackend
             var variables = envVariable.Split(',');
 
             //Use the list to get individual variables
-            builder.DataSource = variables[0].ToString();
-            builder.UserID = variables[1].ToString();
-            builder.Password = variables[2].ToString();
-            builder.InitialCatalog = variables[3].ToString();
+            builder.DataSource = variables[0].ToString().Trim();
+            builder.UserID = variables[1].ToString().Trim();
+            builder.Password = variables[2].ToString().Trim();
+            builder.InitialCatalog = variables[3].ToString().Trim();
             builder.MultipleActiveResultSets = true;
             //connectToDB();
         }
