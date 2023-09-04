@@ -40,7 +40,7 @@ namespace AlsmatikBackend.Controllers
         {
             var handler = DbHandler.GetDbHandlerInstance();
             // Check this query. Max is being used without an order by
-            string query = $"SELECT ParamValue FROM [PLCSQL].[dbo].[File_STRING] WHERE SetID = (SELECT MAX(SetID) FROM [PLCSQL].[dbo].[File_STRING] WHERE ParamValue = '{FileName}' GROUP BY ParamValue) AND ParamID = 35009";
+            string query = $"SELECT ParamValue FROM [File_STRING] WHERE SetID = (SELECT MAX(SetID) FROM [File_STRING] WHERE ParamValue = '{FileName}' GROUP BY ParamValue) AND ParamID = 35009";
             var fileDataAsBase64String = handler.ExecuteRawQuery(query)[0][0]["ParamValue"].ToString().Trim();
 
             // No need to remove the prefix this time

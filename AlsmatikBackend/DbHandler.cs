@@ -11,7 +11,9 @@ namespace AlsmatikBackend
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         SqlConnection connection;
         //Use the private constructor because singleton
+        
         private static DbHandler Instance = new DbHandler();
+        
         private DbHandler() // singleton constructor
         {
             //Get the environment variable
@@ -28,7 +30,9 @@ namespace AlsmatikBackend
             builder.MultipleActiveResultSets = true;
             //connectToDB();
         }
+        
 
+     
         public static DbHandler GetDbHandlerInstance() //Singleton getter
         {
             return Instance;
