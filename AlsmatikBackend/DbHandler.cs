@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -15,7 +16,7 @@ namespace AlsmatikBackend
         {
             //Get the environment variable
             //string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
-            string envVariable = Environment.GetEnvironmentVariable("PLCSQLDetails", EnvironmentVariableTarget.Machine).ToString();
+            string envVariable = Environment.GetEnvironmentVariable("DatabaseConnection", EnvironmentVariableTarget.Machine).ToString();
             //The single variable holds all the information, so split it up
             var variables = envVariable.Split(',');
 
