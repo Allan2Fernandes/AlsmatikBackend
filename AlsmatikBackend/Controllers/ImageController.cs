@@ -68,7 +68,7 @@ namespace AlsmatikBackend.Controllers
         public async Task<IActionResult> getReducedImageOnFileName(string FileName)
         {
             var handler = DbHandler.GetDbHandlerInstance();
-            string query = $"SELECT ParamValue FROM [PLCSQL].[dbo].[File_STRING] WHERE SetID = (SELECT MAX(SetID) FROM [PLCSQL].[dbo].[File_STRING] WHERE ParamValue = '{FileName}' GROUP BY ParamValue) AND ParamID = 35010";
+            string query = $"SELECT ParamValue FROM [File_STRING] WHERE SetID = (SELECT MAX(SetID) FROM [File_STRING] WHERE ParamValue = '{FileName}' GROUP BY ParamValue) AND ParamID = 35010";
             var fileDataAsBase64String = handler.ExecuteRawQuery(query)[0][0]["ParamValue"].ToString().Trim();
 
             // No need to remove the prefix this time
