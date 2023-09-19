@@ -14,7 +14,7 @@ namespace AlsmatikBackend.Controllers
         [HttpGet(nameof(ControllerIsOnline))]
         public async Task<ActionResult<string>> ControllerIsOnline()
         {
-            return Ok("Online");
+            return Ok(new {Result = "Online"});
         }
 
         [HttpGet(nameof(ExecuteRawQuery) + "/{RawQuery}")]
@@ -32,12 +32,11 @@ namespace AlsmatikBackend.Controllers
         [HttpPost(nameof(ExecuteRawQueryFromBody))]
         public async Task<ActionResult<List<object>>> ExecuteRawQueryFromBody(BodyQuery BodyQuery)
         {
+            Console.WriteLine("Query reached backend");
             //Get an instance of the Db Handler
             var handler = DbHandler.GetDbHandlerInstance();
-
             //Execute the raw query
             var data = handler.ExecuteRawQuery(BodyQuery.Query);
-
             //Return the data
             return Ok(data);
         }
@@ -45,3 +44,4 @@ namespace AlsmatikBackend.Controllers
     }
 
 }
+ 

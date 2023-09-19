@@ -12,7 +12,7 @@ namespace AlsmatikBackend
         SqlConnection connection;
         //Use the private constructor because singleton
         
-        private static DbHandler Instance = new DbHandler();
+        private static DbHandler Instance = null;
         
         private DbHandler() // singleton constructor
         {
@@ -35,6 +35,10 @@ namespace AlsmatikBackend
      
         public static DbHandler GetDbHandlerInstance() //Singleton getter
         {
+            if(Instance == null)
+            {
+                Instance = new DbHandler();
+            }
             return Instance;
         }
 
