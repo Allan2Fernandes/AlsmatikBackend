@@ -33,11 +33,12 @@ namespace AlsmatikBackend.Controllers
         }
 
 
-        [HttpGet(nameof(getImageOnFileName) + "/{FileName}")]
+        [HttpGet(nameof(getImageOnFileName) + "/{FileName}/{CacheBreaker}")]
         //[ResponseCache(Duration = 2592000, Location = ResponseCacheLocation.Any, NoStore = false)]
 
-        public async Task<IActionResult> getImageOnFileName(string FileName)
+        public async Task<IActionResult> getImageOnFileName(string FileName, string CacheBreaker)
         {
+            Console.WriteLine(FileName);
             var handler = DbHandler.GetDbHandlerInstance();
             // Check this query. Max is being used without an order by
             string query = $"EXECUTE [dbo].[sp_GetImageEncodingOnName] @imageName = '{FileName}';";
@@ -62,6 +63,18 @@ namespace AlsmatikBackend.Controllers
             return File(imageBytes, contentType);
         }
 
+        [HttpGet(nameof(disableImageOnName) + "/{FileName}")]
+        public async Task<ActionResult<string>> disableImageOnName(string FileName)
+        {
+            var handler = DbHandler.GetDbHandlerInstance();
+            // Get the image encoding before it can be reinserted with an updated status
+            string query = $"EXECUTE [dbo].[sp_GetImageEncodingOnName] @imageName = '{FileName}';";
+            
+            return Ok(new { Result = "Done"});
+        }
+
+
+        // UNUSED
         [HttpGet(nameof(getReducedImageOnFileName) + "/{FileName}")]
         //[ResponseCache(Duration = 2592000, Location = ResponseCacheLocation.Any, NoStore = false)]
 

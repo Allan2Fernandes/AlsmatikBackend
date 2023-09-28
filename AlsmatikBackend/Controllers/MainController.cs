@@ -32,7 +32,6 @@ namespace AlsmatikBackend.Controllers
         [HttpPost(nameof(ExecuteRawQueryFromBody))]
         public async Task<ActionResult<List<object>>> ExecuteRawQueryFromBody(BodyQuery BodyQuery)
         {
-            Console.WriteLine("Query reached backend");
             //Get an instance of the Db Handler
             var handler = DbHandler.GetDbHandlerInstance();
             //Execute the raw query

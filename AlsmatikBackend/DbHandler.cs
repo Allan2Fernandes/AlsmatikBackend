@@ -19,6 +19,8 @@ namespace AlsmatikBackend
             //Get the environment variable
             //string envVariable = Environment.GetEnvironmentVariable("SQLPDHSDetails", EnvironmentVariableTarget.Machine).ToString();
             string envVariable = Environment.GetEnvironmentVariable("DatabaseConnection", EnvironmentVariableTarget.Machine).ToString();
+            //string envVariable = Environment.GetEnvironmentVariable("MaleKabineDatabaseConnectionV3", EnvironmentVariableTarget.Machine).ToString();
+         
             //The single variable holds all the information, so split it up
             var variables = envVariable.Split(',');
 
